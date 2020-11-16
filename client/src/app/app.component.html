@@ -1,0 +1,8 @@
+<input type="text" [(ngModel)]="message">
+<button (click)="sendMessage()">Send</button>
+<h2>Online users : {{users.length}}</h2>
+<ul>
+  <li *ngFor="let msgData of messages">
+    {{msgData.title}}
+  </li>
+</ul>
