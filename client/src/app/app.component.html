@@ -1,8 +1,27 @@
-<input type="text" [(ngModel)]="message">
-<button (click)="sendMessage()">Send</button>
-<h2>Online users : {{users.length}}</h2>
-<ul>
-  <li *ngFor="let msgData of messages">
-    {{msgData.title}}
-  </li>
-</ul>
+<div *ngIf="!connected">
+  <h3>Login</h3>
+  <input type="text" [(ngModel)]="username" placeholder="enter a username">
+  <button (click)="login()">Save</button>
+</div>
+<div *ngIf="connected">
+  <p>Logged in as {{username}}</p>
+  <input type="text" [(ngModel)]="message">
+  <button (click)="sendMessage()">Send</button>
+  <h2>Online users : {{users}}</h2>
+  <p *ngIf="joinedUser">{{joinedUser}} has joined to chat</p>
+  <ul class="list">
+    <li 
+      *ngFor="let msgData of messages" 
+      class="list-item"
+      [ngStyle]="{
+        'align-self': msgData.username === username ? 'flex-end' : 'flex-start'
+      }"
+    >
+      (<small>{{msgData.username}}</small>)
+      <span>
+        {{msgData.message}} 
+      </span>
+    </li>
+  </ul>
+  
+</div>
